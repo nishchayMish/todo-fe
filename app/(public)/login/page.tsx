@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import apiClient from "@/lib/apiClient";
 
 type ErrorResponse = {
     message: string;
@@ -21,9 +22,8 @@ const Page = () => {
         setError("");
         const payload = { email, password }
         try {
-            const res = await axios.post("/login", payload);
+            await apiClient.post("/login", payload);
             router.push("/dashboard");
-            console.log("Login success:", res.data);
 
         } catch (err) {
             const error = err as AxiosError<ErrorResponse>;

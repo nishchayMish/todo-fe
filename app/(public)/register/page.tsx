@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { AxiosError } from "axios";
 import apiClient from "@/lib/apiClient";
+import { useRouter } from "next/navigation";
 
 type RegisterRequest = {
     name: string;
@@ -24,6 +25,7 @@ const Page = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const [success, setSuccess] = useState<string>("");
+    const router = useRouter();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm((prev) => ({
@@ -40,6 +42,8 @@ const Page = () => {
 
         try {
             const res = await apiClient.post("/register", form);
+
+            router.push("/login")
 
             setSuccess(res.data.message || "User registered successfully");
 
