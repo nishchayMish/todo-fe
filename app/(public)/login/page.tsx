@@ -24,6 +24,7 @@ const Page = () => {
         try {
             const res = await apiClient.post("/login", payload);
             localStorage.setItem("user", JSON.stringify(res.data.user));
+            window.location.href = "/dashboard";
             router.push("/dashboard");
 
         } catch (err) {
