@@ -8,11 +8,9 @@ const Navbar = () => {
 
     const logout = async () => {
         try {
-            const res = await apiClient.get("/logout");
+            await apiClient.get("/logout");
             localStorage.clear();
-            if (res.status === 200) {
-                router.push("/login");
-            }
+            router.push("/login");
         } catch (error) {
             console.log(error);
         }
