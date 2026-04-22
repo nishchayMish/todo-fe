@@ -22,7 +22,8 @@ const Page = () => {
         setError("");
         const payload = { email, password }
         try {
-            await apiClient.post("/login", payload);
+            const res = await apiClient.post("/login", payload);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
             router.push("/dashboard");
 
         } catch (err) {
